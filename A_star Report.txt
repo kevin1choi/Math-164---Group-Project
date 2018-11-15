@@ -1,0 +1,77 @@
+Finding the Fastest Path within UCLA with Traffic
+
+Problem :
+		Our problem is finding the fastest path within UCLA with traffic. Realistically speaking however,
+	whether the walkways within the school are crowded or not, the time it takes to get from point A to
+	point B is relatively the same. So to make our problem more interesting, we introduce the idea that it
+	could take up to fifteen minutes to walk up Bruin Walk with traffic whereas it would take three minutes
+	without! This may very well be possible on a busy day when students are shoving flyers in each other's
+	face and coercing you to buy stale doughnuts from last week's fundraising event. One would have to stop
+	every couple steps and never make it to class if he or she decides to take this path. And we present our
+	algorithm that will find the fastest path to any destination through UCLA's pathways that have dynamically
+	changing traffic.
+
+Algorithm :
+		The algorithm we decided to employ was the A* algorithm. This algorithm is a best first search which
+	chooses the most promising path based on a heuristic. This heuristic function estimates the Manhattan
+	or Euclidean distance left to the destination and keeps score for every node it visits. Then based on
+	these scores, the algorithm extends one node at each iteration, keeping a tree of paths until reaching
+	its goal. For our implementation of the A* algorithm, we decided to give our edges a temporal value given
+	that it's more intuitive to add time to a path with traffic rather than to increase its distance. 
+	
+*** Comments about time complexity and miscellaneous to be added ***
+
+
+Pseudocode: 
+def A_star(Nodes, start, goal
+	closed_set = [ ]									
+	open_set = [ ]
+	while open_set not empty											
+		current = min(open_set[ ].f_score)
+		if current = goal  --> done
+		if not														
+			remove from open_set											
+			add to closed_set
+			for each neighbor of current											
+				if neighbor in closed_set ---> do nothing
+				g_score_new = current.g_score + weight
+				if neighbor in open_set											
+					if g_score_new > neighbor.g_score									
+					update neighbor.g_score             		
+				else														
+					update neighbor.g_score										
+					update neighbor.f_score										
+					update pathTo												
+					add neighbor to open_set
+
+*** Particular code comments added with the code ***
+
+Analysis : 
+	How would our graph stand up to a larger or denser graph?
+	Are there any shortcomings? (i.e. negative edges, assumptions, etc)
+	What can be done to improve time complexity?
+*** To be determined ***
+
+
+Study :
+		We now further our study and hope to modify our algorithm in an attempt to give it the ability to tackle
+	graphs that are more dense. Historically in industry, two main strategies were used for high volume graphs.
+	The first of such methods avoids an all pairs computation by only computing paths that can connect the starting
+	and final points with a number of pre-computed paths. This type of "pre-processing" partitioned the graph into
+	sub-paths but took too long to process while having to assume planarity and only being able to partition undirected
+	graphs.
+		The other exploited the natural hierarchy of a graph and gave edges priority based on the distance needed to
+	travel. This method improved the time complexity and size but only at the cost of it not being able to guarantee
+	optimality of its path. It also required a bi-directional search. One thing these pre-processing methods had in
+	common, however, was that both algorithms were not flexible to dynamic changes in the network.
+		One such study aimed to implement a sort of pre-processing to its algorithm when solving the problem of finding
+	the shortest path over a long distance in a highly dense map. This study introduced the idea of giving its nodes an
+	extra property to indicate its value in solving the problem more efficiently. After this pre-processing, the algorithm
+	chose its path based on these values and saw an efficiency of ten percent when compared to Dijkstra's algorithm over
+	long distances.
+		In our problem, we introduce the possibility of an ever increasing amount of nodes making our graph very dense.
+	Although we believe our algorithm would find the fastest path proportionally well given the increased density, we
+	also wonder if we could help its cause by implementing a bit of pre-processing similar to the previously mentioned study
+	and methods. 
+
+	*** More to come ***
